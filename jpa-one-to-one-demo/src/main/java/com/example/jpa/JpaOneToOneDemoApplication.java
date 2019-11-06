@@ -1,10 +1,12 @@
 package com.example.jpa;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import com.example.jpa.model.Gender;
 import com.example.jpa.model.User;
 import com.example.jpa.model.UserProfile;
@@ -32,12 +34,13 @@ public class JpaOneToOneDemoApplication implements CommandLineRunner{
 		
 		//Create a User interface
 		User user = new User("ARS", "SET", "ars@email.com", "tes1234");
-		
-		Calendar dateOfBirth = Calendar.getInstance();
-		dateOfBirth.set(1992, 3, 23);
-		
+				
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateInString = "1992-3-23";
+		Date date = sdf.parse(dateInString);
+				
 		//Create a User profile instance
-		UserProfile userProfile = new UserProfile("021-22345", Gender.MALE, dateOfBirth.getTime(), "TNG", "KBMN", "JTJJR KM. 4", "IDN", "KBMN", "54472");
+		UserProfile userProfile = new UserProfile("021-22345", Gender.MALE,date, "TNG", "KBMN", "JTJJR KM. 4", "IDN", "KBMN", "54472");
 	
 		//Set child reference(userProfile) in parent entity(user)
 		user.setUserProfile(userProfile);
